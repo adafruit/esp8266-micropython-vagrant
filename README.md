@@ -2,6 +2,11 @@
 Vagrant file to build a virtual machine that can compile the ESP8266 open SDK &amp; 
 MicroPython firmware.
 
+Note that MicroPython support for the ESP8266 is in _very_ early stages and does
+not support the full capabilities of other MicroPython boards.  However this VM
+will help make it easy to build and install MicroPython for the ESP8266 to test
+it out and even contribute to it.
+
 # Dependencies
 
 You must have the following software installed:
@@ -56,7 +61,7 @@ the VM by changing this line in the Vagrantfile
     v.memory = 1024
 
 I found at least 1 gigabyte of memory was required to compile the SDK (and that
-is the default configuration value).  If you change the Vagrant file you will
+is the default configuration value).  If you change the Vagrantfile you will
 need to stop and restart the VM (see the Stopping & Starting the VM section
 further below).
 
@@ -97,15 +102,15 @@ Finally you're ready to compile MicroPython firmware for the ESP8266 by executin
     cd ~/micropython/esp8266
     make
 
-After the firmware compilation finishes the output will be the file ./build/firmware-combined.elf.
+After the firmware compilation finishes the output will be the file ./build/firmware-combined.bin.
 This file should be flashed to the ESP8266 using any convenient flashing tool
-(instructions are further below).  You can copy the firmware-combined.elf file
+(instructions are further below).  You can copy the firmware-combined.bin file
 to Vagrant's shared directory so it is accessible from your main computer and
 not just the Vagrant VM.  Do this by running:
 
-    cp ./build/firmware-combined.elf /vagrant/
+    cp ./build/firmware-combined.bin /vagrant/
 
-Now on your machine machine (not on the VM!) look inside the folder with the
+Now on your machine (not on the VM!) look inside the folder with the
 Vagrantfile and you should see the firmware-combined.elf file.
 
 If you make any changes to MicroPython, like modifying the ./scripts/main.py
