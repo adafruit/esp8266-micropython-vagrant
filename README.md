@@ -6,9 +6,9 @@ MicroPython firmware.
 
 You must have the following software installed:
 
-*  (VirtualBox)[https://www.virtualbox.org/]
+*  [VirtualBox](https://www.virtualbox.org/)
 
-*  (Vagrant)[https://www.vagrantup.com/]
+*  [Vagrant](https://www.vagrantup.com/)
 
 # Usage
 
@@ -26,10 +26,10 @@ command to enter an SSH session on it:
 Once inside the virtual machine you will see two git repositories that have
 already been cloned:
 
-*   (esp-open-sdk)[https://github.com/pfalcon/esp-open-sdk] - This is an SDK to
+*   [esp-open-sdk](https://github.com/pfalcon/esp-open-sdk) - This is an SDK to
     compile code for the ESP8266's processor.
 
-*   (micropython)[https://github.com/micropython/micropython] - This the MicroPython
+*   [micropython](https://github.com/micropython/micropython) - This the MicroPython
     SDK which allows running embedded Python code on an ESP8266.
 
 ## ESP Open SDK Compilation
@@ -56,7 +56,9 @@ the VM by changing this line in the Vagrantfile
     v.memory = 1024
 
 I found at least 1 gigabyte of memory was required to compile the SDK (and that
-is the default configuration value).
+is the default configuration value).  If you change the Vagrant file you will
+need to stop and restart the VM (see the Stopping & Starting the VM section
+further below).
 
 Once the ESP open SDK compilation has finished you need to extend the path
 environment variable so the tools are accessible to MicroPython and other build
