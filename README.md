@@ -1,18 +1,20 @@
 # ESP8266 & MicroPython SDK Virtual Machine
-Vagrant file to build a virtual machine that can compile the ESP8266 open SDK &amp; 
-MicroPython firmware.
+Vagrant file to build a virtual machine that can compile the [ESP8266 open SDK](https://github.com/pfalcon/esp-open-sdk) &amp; 
+[MicroPython](https://micropython.org/) firmware.
 
 Note that MicroPython support for the ESP8266 is in _very_ early stages and does
 not support the full capabilities of other MicroPython boards.  However this VM
 will help make it easy to build and install MicroPython for the ESP8266 to test
 it out and even contribute to it.
 
+Many thanks to the contributors of ESP open SDK & MicroPython for making
+their excellent software available!
+
 # Dependencies
 
 You must have the following software installed:
 
 *  [VirtualBox](https://www.virtualbox.org/)
-
 *  [Vagrant](https://www.vagrantup.com/)
 
 # Usage
