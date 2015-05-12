@@ -86,21 +86,6 @@ After the ESP open SDK has been compiled and added to the path, execute the
 following commands to start compiling MicroPython (the compilation is quick and
 only takes a few minutes depending on the speed of your machine):
 
-    cd ~/micropython/unix
-    make
-
-Now run the tests included in micropython to help confirm it has been successfully
-compiled.  You should see over 400 tests are run and all succeed (if there are
-failures search on the micropython github issues to see if they are expected).
-
-    make test
-
-Next install MicroPython's shared tools by running:
-
-    sudo make install
-
-Finally you're ready to compile MicroPython firmware for the ESP8266 by executing:
-
     cd ~/micropython/esp8266
     make
 
