@@ -106,14 +106,14 @@ Finally you're ready to compile MicroPython firmware for the ESP8266 by executin
 
 After the firmware compilation finishes the output will be the file ./build/firmware-combined.bin.
 This file should be flashed to the ESP8266 using any convenient flashing tool
-(instructions are further below).  You can copy the firmware-combined.bin file
+(see Flashing ESP8266 Firmware below).  You can copy the firmware-combined.bin file
 to Vagrant's shared directory so it is accessible from your main computer and
 not just the Vagrant VM.  Do this by running:
 
     cp ./build/firmware-combined.bin /vagrant/
 
 Now on your machine (not on the VM!) look inside the folder with the
-Vagrantfile and you should see the firmware-combined.elf file.
+Vagrantfile and you should see the firmware-combined.bin file.
 
 If you make any changes to MicroPython, like modifying the ./scripts/main.py
 file to change the boards's behavior on boot, you can recompile the MicroPython
@@ -133,3 +133,74 @@ To start the VM and SSH into it again just run:
 
     vagrant up
     vagrant ssh
+
+## Flashing ESP8266 Firmware
+
+To flash the MicroPython firmware to the ESP8266 you can use the excellent
+[esptool.py](https://github.com/themadinventor/esptool) Python script.  Note that
+you'll run this script from your machine and _not_ the Vagrant VM that compiled
+the firmware!
+
+First you need to make sure you have [Git](http://git-scm.com/downloads) 
+and [Python 2.7](https://www.python.org/downloads/) installed and have the 
+[PySerial library](http://pyserial.sourceforge.net/).  For Windows users 
+the easiest thing to do is install the [pyserial-2.7.win32.exe installer](https://pypi.python.org/pypi/pyserial) 
+and run it to install the library.  For Mac OSX or Linux users you can 
+instead install the library by [installing pip](https://pip.pypa.io/en/latest/installing.html) 
+and then running in a terminal:
+
+    sudo pip install pyserial
+
+Once pyserial is installed clone the esptool.py repository by running in
+a terminal:
+
+    git clone https://github.com/themadinventor/esptool.git
+
+Then change to the directory with the esptool.py script and invoke it with the -h
+option to see its usage:
+
+    cd esptool
+    python esptool.py -h
+
+You should see something like the following printed:
+
+    usage: esptool [-h] [--port PORT] [--baud BAUD]
+               {load_ram,dump_mem,read_mem,write_mem,write_flash,run,image_info,make_image,elf2image,read_mac,flash_id,read_flash,erase_flash}
+                   ...
+    ...
+
+Now to flash the ESP8266 firmware make sure your ESP8266 is connected to your
+machine using a USB to serial cable.  Find the name of the serial port using
+Device Manager on Windows, or running `ls -l /dev/tty*` on Mac OSX or Linux
+(usually it's a device /dev/ttyUSB on Linux).
+
+You also need to make sure you have a firmware-combined.bin file that was
+built inside the VM in the previous steps.
+
+To flash the chip with the firmware, hold down the GPIO0 button and then press
+the reset button (while still holding GPIO0).  Release the reset button and then
+release the GPIO0 button.  Now run in the terminal:
+
+    python esptool.py -p <serial port name> write_flash 0x00 firmware-combined.bin
+
+Replace `<serial port name>` with the name of the serial port connected to the
+ESP8266, and replace firmware-combined.bin with the path to the firmware-combined.bin
+file if it is not already in the same directory.  For example to flash the chip
+from a Linux machine a command like the following is run:
+
+    python esptool.py -p /dev/ttyUSB0 write_flash 0x00 firmware-combined.bin
+
+The ESP8266 will be flashed with the MicroPython firmware and you should see output
+like the following:
+
+    Connecting...
+    Erasing flash...
+    Writing at 0x0004d800... (100 %)
+    
+    Leaving...
+
+Congratulations you've flashed the ESP8266 with MicroPython!  Now to test it out
+connect to the ESP8266's serial port at 115200 baud.  You should see a Python REPL,
+for example try typing:
+
+    print('Hello world!')
