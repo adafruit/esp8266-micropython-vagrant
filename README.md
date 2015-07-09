@@ -36,7 +36,7 @@ already been cloned:
 *   [esp-open-sdk](https://github.com/pfalcon/esp-open-sdk) - This is an SDK to
     compile code for the ESP8266's processor.
 
-*   [micropython](https://github.com/micropython/micropython) - This the MicroPython
+*   [micropython](https://github.com/micropython/micropython) - This is the MicroPython
     SDK which allows running embedded Python code on an ESP8266.
 
 ## ESP Open SDK Compilation
