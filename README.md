@@ -25,13 +25,9 @@ compiling the tools:
 
     vagrant up
 
-After the virtual machine is brought up and provisioned use the following
-command to enter an SSH session on it:
-
-    vagrant ssh
-
-Once inside the virtual machine you will see two git repositories that have
-already been cloned:
+This will set up your development environment and will take about 30 minutes to
+an hour or more depending on the speed of your machine. This is due to the
+process of cloning and compiling two git repositories:
 
 *   [esp-open-sdk](https://github.com/pfalcon/esp-open-sdk) - This is an SDK to
     compile code for the ESP8266's processor.
@@ -39,22 +35,21 @@ already been cloned:
 *   [micropython](https://github.com/micropython/micropython) - This is the MicroPython
     SDK which allows running embedded Python code on an ESP8266.
 
-## ESP Open SDK Compilation
+After the virtual machine is brought up and provisioned use the following
+command to enter an SSH session on it:
 
-You will want to first compile the ESP open SDK by executing (note that the
-compilation will take about 30 minutes to an hour or more depending on the speed
-of your machine):
+    vagrant ssh
 
-    cd esp-open-sdk
-    make STANDALONE=y
+Once inside the virtual machine you will see the two git repositories that have
+already been cloned.
 
-Note that if the compilation fails with an error like:
+Note that if the setup fails with an error like:
 
     [ERROR]    collect2: error: ld terminated with signal 9 [Killed]
     [ERROR]    make[4]: *** [cc1] Error 1
     [ERROR]    make[3]: *** [all-gcc] Error 2
 
-This means the virtual machine ran out of memory during the last stages of the
+It means that the virtual machine ran out of memory during the last stages of the
 compilation process.  You can resolve this by bumping up the memory available to
 the VM by changing this line in the Vagrantfile
 
@@ -67,20 +62,7 @@ is the default configuration value).  If you change the Vagrantfile you will
 need to stop and restart the VM (see the Stopping & Starting the VM section
 further below).
 
-Once the ESP open SDK compilation has finished you need to extend the path
-environment variable so the tools are accessible to MicroPython and other build
-scripts.  You can do this by changing the .profile file so that on every login
-to the virtual machine it extends the path to includes these tools.  Do this by
-executing:
-
-    echo "PATH=$(pwd)/xtensa-lx106-elf/bin:\$PATH" >> ~/.profile
-
-Finally exit and re-enter the VM to make this path change available by running:
-
-    exit
-    vagrant ssh
-
-## MicroPython Compilation
+## MicroPython Firmware Compilation
 
 After the ESP open SDK has been compiled and added to the path, execute the
 following commands to start compiling MicroPython (the compilation is quick and

@@ -32,7 +32,15 @@ Vagrant.configure(2) do |config|
     echo "Installing esp-open-sdk, Espressif ESP-IDF, and micropython source..."
     git clone --recursive https://github.com/pfalcon/esp-open-sdk.git
     git clone --recursive https://github.com/espressif/esp-idf.git
-    git clone https://github.com/micropython/micropython.git
+    cd esp-open-sdk
+    make STANDALONE=y
+    echo "PATH=$(pwd)/xtensa-lx106-elf/bin:\$PATH" >> ~/.profile
+    source ~/.profile
+    cd ..
+    git clone --recursive https://github.com/micropython/micropython.git
+    cd micropython
+    make -C mpy-cross
+    make -C esp8266 axtls
     echo "Finished provisioning, now run 'vagrant ssh' to enter the virtual machine."
   SHELL
 
