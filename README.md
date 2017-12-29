@@ -27,15 +27,18 @@ compiling the tools:
 
 This will set up your development environment and will take about 30 minutes to
 an hour or more depending on the speed of your machine. This is due to the
-process of cloning and compiling two git repositories:
+process of cloning and compiling three git repositories:
 
 *   [esp-open-sdk](https://github.com/pfalcon/esp-open-sdk) - This is an SDK to
     compile code for the ESP8266's processor.
 
+*   [esp-idf](https://github.com/espressif/esp-idf) - The official Espressif IoT
+    development framework.
+
 *   [micropython](https://github.com/micropython/micropython) - This is the MicroPython
     SDK which allows running embedded Python code on an ESP8266.
 
-After the virtual machine is brought up and provisioned use the following
+After the virtual machine is brought up and provisioned, use the following
 command to enter an SSH session on it:
 
     vagrant ssh
@@ -62,16 +65,9 @@ is the default configuration value).  If you change the Vagrantfile you will
 need to stop and restart the VM (see the Stopping & Starting the VM section
 further below).
 
-## MicroPython Firmware Compilation
+## MicroPython Firmware
 
-After the ESP open SDK has been compiled and added to the path, execute the
-following commands to start compiling MicroPython (the compilation is quick and
-only takes a few minutes depending on the speed of your machine):
-
-    cd ~/micropython/esp8266
-    make
-
-After the firmware compilation finishes the output will be the file ./build/firmware-combined.bin.
+After the development environment finishes, a file should have been produced ./build/firmware-combined.bin.
 This file should be flashed to the ESP8266 using any convenient flashing tool
 (see Flashing ESP8266 Firmware below).  You can copy the firmware-combined.bin file
 to Vagrant's shared directory so it is accessible from your main computer and
