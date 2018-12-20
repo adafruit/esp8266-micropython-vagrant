@@ -1,3 +1,9 @@
+# DEPRECATED LIBRARY.
+
+This library has been deprecated! We are leaving this up for historical and research purposes but archiving the repository.
+
+We are now only supporting the use of our CircuitPython. Please see this guide on building CircuitPython: https://learn.adafruit.com/building-circuitpython
+
 # ESP8266 & MicroPython SDK Virtual Machine
 Vagrant file to build a virtual machine that can compile the [ESP8266 open SDK](https://github.com/pfalcon/esp-open-sdk) &amp; 
 [MicroPython](https://micropython.org/) firmware.
